@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formulario de Pokémon</title>
+    <style>
+      /* Aplicar estilo al formulario y los campos */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+label {
+  margin-top: 1rem;
+  display: block;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  padding: 0.5rem;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Aplicar estilo al mensaje de confirmación */
+#mensaje-guardado {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+.mostrar-mensaje {
+  display: block !important;
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- Aquí va el resto del código HTML y JavaScript -->
+    <form onsubmit="guardarPokemon(event)">
+      <label for="nombre_pokemon">Nombre del Pokémon:</label>
+      <input type="text" id="nombre_pokemon" name="nombre_pokemon"><br>
+
+      <label for="tipo_pokemon">Tipo de Pokémon:</label>
+      <input type="text" id="tipo_pokemon" name="tipo_pokemon"><br>
+
+      <label for="nombre_dueño">Nombre del Dueño:</label>
+      <input type="text" id="nombre_dueño" name="nombre_dueño"><br>
+
+      <label for="nombre_pokebola">Nombre de la Pokébola:</label>
+      <input type="text" id="nombre_pokebola" name="nombre_pokebola"><br>
+
+      <input type="submit" value="Guardar">
+    </form>
+
+    <script>
+      // Definición de la clase Pokemon
+      class Pokemon {
+        constructor(nombre, tipo) {
+          this.nombre = nombre;
+          this.tipo = tipo;
+        }
+      }
+
+      // Definición de la clase Dueño
+      class Dueño {
+        constructor(nombre, pokemon) {
+          this.nombre = nombre;
+          this.pokemon = pokemon;
+        }
+      }
+
+      // Definición de la clase Pokebola
+      class Pokebola {
+        constructor(nombre, pokemon) {
+          this.nombre = nombre;
+          this.pokemon = pokemon;
+        }
+      }
+
+      // Lista para almacenar los objetos creados
+      let listaPokemon = [];
+
+      // Función para guardar los datos del formulario
+      function guardarPokemon(event) {
+        event.preventDefault();
+
+        // Tomar los valores ingresados en el formulario
+        const nombrePokemon = document.getElementById("nombre_pokemon").value;
+        const tipoPokemon = document.getElementById("tipo_pokemon").value;
+        const nombreDueño = document.getElementById("nombre_dueño").value;
+        const nombrePokebola = document.getElementById("nombre_pokebola").value;
+
+        // Crear un objeto Pokemon con los valores ingresados
+        const pokemon = new Pokemon(nombrePokemon, tipoPokemon);
+
+        // Crear un objeto Dueño con los valores ingresados y el objeto Pokemon creado
+        const dueño = new Dueño(nombreDueño, pokemon);
+
+        // Crear un objeto Pokebola con los valores ingresados y el objeto Pokemon creado
+        const pokebola = new Pokebola(nombrePokebola, pokemon);
+
+        // Agregar los objetos creados a la lista
+        listaPokemon.push(pokemon, dueño, pokebola);
+
+        // Mostrar la lista en la consola para verificar que los objetos fueron creados y agregados a la lista
+        console.log(listaPokemon);
+
+        // Limpiar el formulario después de guardar los datos
+        document.getElementById("nombre_pokemon").value = "";
+        document.getElementById("tipo_pokemon").value = "";
+        document.getElementById("nombre_dueño").value = "";
+        document.getElementById("nombre_pokebola").value = "";
+
+        // Mostrar mensaje de confirmación
+        alert("¡Los datos han sido guardados!");
+      }
+    </script>
+  </body>
+</html>
